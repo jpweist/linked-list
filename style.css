@@ -29,8 +29,18 @@ h1 {
 
 .output-article {
   background-color: #CFD8DC;
+  display: flex;
   height: 100vh;
+  margin: .5rem;
   width: 50%;
+  flex-direction: column;
+}
+h3 {
+  color: #455A64;
+  font-weight: 800;
+}
+hr {
+  color: #607D8B;
 }
 .user-input-section {
   border: none;
@@ -50,4 +60,20 @@ h1 {
 }
 button {
 
+}
+
+.card {
+  background-color: #F2F4F4;
+  width: 47vw;
+}
+.read, .delete {
+  color: #455A64;
+  font-size: 0.6rem;
+}
+
+.delete {
+}
+
+.url {
+  font-weight: 100;
 }
