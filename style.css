@@ -70,7 +70,9 @@ button {
   color: #455A64;
   font-size: 0.6rem;
 }
-
+.read-selected {
+  color: pink;
+}
 .delete {
 }
 

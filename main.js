@@ -7,9 +7,13 @@ var bookMarksArray = [];
 
 // ######### event listners
 pageEvents.addEventListener('click', function(event) {
-  console.log(event.target.classList[0]);
+  // console.log(event.target.classList[0]);
   // console.log(event.target.value);
+  reading()
+
 });
+
+
 
 enterButton.addEventListener('click', function() {
   getInputs();
@@ -54,6 +58,19 @@ function outputBookMarks() {
     <p class="delete">Delete</p></input> `;
     outputArticle.appendChild(div);
     // console.log(i);
-
   }
+
+}
+function reading() {
+  if (event.target.classList[0] === 'read' && bookMarksArray[0].read === true) {
+    bookMarksArray[0].read = !true;
+    event.target.classList.toggle('read-selected');
+    console.log('toggle false', `${bookMarksArray[0].read}`);
+  }
+  if (event.target.classList[0] === 'read' && bookMarksArray[0].read === !true) {
+    bookMarksArray[0].read = true;
+    event.target.classList.toggle('read-selected');
+    console.log('toggle to true?', `${bookMarksArray[0].read}`);
+  }
+
 }
