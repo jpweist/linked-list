@@ -70,10 +70,19 @@ button {
   color: #455A64;
   font-size: 0.6rem;
 }
+.read:hover {
+  text-decoration: underline;
+  text-decoration-color: #FFC107;
+}
 .read-selected {
-  color: pink;
+  text-decoration: underline;
+  text-decoration-color: #FFC107;
 }
 .delete {
+}
+.delete:hover {
+  text-decoration: underline;
+  text-decoration-color: #FFC107;
 }
 
 .url {
