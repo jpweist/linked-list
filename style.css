@@ -11,20 +11,22 @@ main {
 
 h1 {
   color: #FFFFFF;
+  font-size: 2.1rem;
   text-align: center;
 }
 
 .user-input-header span img{
-  width: 28px;
+  width: 45px;
 }
 
 .input-article {
   align-items: center;
   background-color: #455A64;
+  display: flex;
   flex-direction: column;
   height: 100vh;
-  display: flex;
-  width: 50%;
+  justify-content: center;
+  width: 100%;
 }
 
 .output-article {
@@ -32,43 +34,64 @@ h1 {
   display: flex;
   height: 100vh;
   margin: .5rem;
-  width: 50%;
+  width: 100%;
   flex-direction: column;
 }
-h3 {
+.h3 {
   color: #455A64;
   font-weight: 800;
+  margin-bottom: .5rem;
+  margin-left: .3rem;
 }
 hr {
-  color: #607D8B;
+  border: .5px solid #CFD8DC;
 }
 .user-input-section {
   border: none;
   display: flex;
+  width: 85%;
 }
 .user-input-section input {
   border: none;
+  color: gray;
   display: block;
   margin: auto;
-  margin-bottom: .5rem;
+  margin-bottom: 1.2rem;
   margin-top: .5rem;
+  padding: .1rem .2rem;
   width: 95%;
 }
 
 .user-input-header {
 
 }
+
 button {
-
+  background-color: #FFC107;
+  border: none;
+  margin: 0 auto;
+  width: 98%;
+  color: #FFFFFF;
+  font-weight: 900;
+  padding: .1rem .2rem;
 }
-
+button:hover {
+  background-color: #FFD773;
+}
 .card {
   background-color: #F2F4F4;
+  margin: .5rem;
+  padding: 0 .5rem;
   width: 47vw;
+  border: 1px solid #607D8b;
+
 }
 .read, .delete {
   color: #455A64;
   font-size: 0.6rem;
+  display: inline;
+  text-decoration: underline;
+  text-decoration-color: #CFD8DC;
 }
 .read:hover {
   text-decoration: underline;
@@ -79,6 +102,7 @@ button {
   text-decoration-color: #FFC107;
 }
 .delete {
+  margin-left: 15.5rem;
 }
 .delete:hover {
   text-decoration: underline;
@@ -87,4 +111,12 @@ button {
 
 .url {
   font-weight: 100;
+  margin: 0 0 .5rem .3rem;
+  text-decoration: underline;
+  color: #607D8b;
+  text-decoration-color: #CFD8DC;
+}
+
+.error {
+  background-color: rgba(255,193,7, 0.8);
 }

@@ -1,6 +1,6 @@
 class Bookmark {
   constructor(title, url) {
-    this.id = Date.now();
+    this.id = Date.now().toString();
     this.title = title;
     this.url = url;
     this.read = false;
