@@ -58,8 +58,8 @@ hr {
   margin: auto;
   margin-bottom: 1.2rem;
   margin-top: .5rem;
-  padding: .1rem .2rem;
-  width: 95%;
+  padding:  .1rem 0;
+  width: 100%;
 }
 
 .user-input-header {
@@ -70,7 +70,7 @@ button {
   background-color: #FFC107;
   border: none;
   margin: 0 auto;
-  width: 98%;
+  width: 100%;
   color: #FFFFFF;
   font-weight: 900;
   padding: .1rem .2rem;
@@ -119,6 +119,7 @@ button:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: .2rem;
 }
 .read {
   width: 89%;
@@ -142,6 +143,9 @@ button:hover {
   }
 }
 @media (max-width: 440px){
+  h1 {
+    font-size: 1.7rem;
+  }
   main {
     flex-direction: column;
   }

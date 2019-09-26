@@ -9,13 +9,18 @@ var counter = 0;
 var target = '';
 var userInputWeb = document.querySelector('.user-input-web');
 var userInputURL = document.querySelector('.user-input-url');
+// ######### event listners
 
 window.onload = function() {
-  fromLS();
-  outputBookMarks();
+  // lSArray();
+  // fromLS();
+  // outputBookMarks();
+  getBookmarks();
 
 }
-// ######### event listners
+window.addEventListener('load', getBookmarks());
+
+
 pageEvents.addEventListener('click', function(event) {
   // console.log(event.target.classList[0]);
   // console.log(event.target.classList);
@@ -23,7 +28,7 @@ pageEvents.addEventListener('click', function(event) {
   console.log(event.path[1].id);
   target = event.path[1].id;
   // console.log(event.target.closest.id);
-  reading()
+  reading(target)
   deleteBookmark(target);
 
 });
@@ -32,7 +37,6 @@ pageEvents.addEventListener('click', function(event) {
 
 enterButton.addEventListener('click', function() {
   getInputs();
-  // outputBookMarks();
   lSArray();
   fromLS();
   outputBookMarks()
@@ -41,8 +45,12 @@ enterButton.addEventListener('click', function() {
 
 
 // ########## functions
-function checkInputs() {
-
+function getBookmarks() {
+  if(localStorage.length > 0) {
+    lSArray();
+    fromLS();
+    outputBookMarks();
+  }
 }
 
 
@@ -70,12 +78,15 @@ function makeClass(title, url) {
 }
 
 function outputBookMarks() {
-  var div = document.createElement('div');
-  div.innerHTML = '';
+
+  if (arrayFls.length !== 0) {
 
     for (var i = 0; i < arrayFls.length; i++) {
+      var div = document.createElement('div');
+      div.innerHTML = '';
       div.innerHTML =  `<div id='${arrayFls[i].id}' class='card'><h3 class='h3'>${arrayFls[i].title}</h3><hr/><p class='url'>${arrayFls[i].url}</p><hr/><div class="read-delete"><p class='read'>Read</p><p class='delete'>Delete</p><div></div>`
       outputArticle.appendChild(div);
+  }
     }
   };
 
@@ -85,36 +96,45 @@ function outputBookMarks() {
 function lSArray() {
   if (bookMarksArray !== 0) {
     var toStringBooks = JSON.stringify(bookMarksArray);
-    window.localStorage.setItem('bookMarkLS', toStringBooks);
+    localStorage.setItem('bookMarkLS', toStringBooks);
   }
 
 }
 // from localStorage
 function fromLS() {
-  arrayFls = JSON.parse(window.localStorage.getItem('bookMarkLS'));
+  var fromStorage = localStorage.getItem("bookMarkLS");
+
+  arrayFls = JSON.parse(fromStorage);
 }
 
 function deleteBookmark(target) {
   for (var i = 0; i <arrayFls.length; i++ ) {
     if (arrayFls[i].id === target) {
-      arrayFls.splice(i, 1);
+      arrayFls.splice([i], 1);
       }
     }
-    makeClass();
   }
 
 
-function reading() {
-  if (event.target.classList[0] === 'read' && bookMarksArray[0].read === true) {
-    bookMarksArray[0].toggleRead(!true);
-    event.target.classList.toggle('read-selected');
-    // console.log('toggle false', `${bookMarksArray[0].read}`);
+function reading(target) {
+  // loop thru bookMarksArray and find the id that was clicked on for deleteBtn
+  // call the toggleRead function on the object to change read to true.
+    if (bookMarksArray.length !== 0 && bookMarksArray[0].id === target) {
+      bookMarksArray[0].toggleRead();
+      event.target.classList.toggle('read-selected');
 
-  }
-  if (event.target.classList[0] === 'read' && bookMarksArray[0].read === false) {
-    bookMarksArray[0].toggleRead(!false);
-    event.target.classList.toggle('read-selected');
-    // console.log('toggle to true?', `${bookMarksArray[0].read}`);
+    }
 
-  }
-}
+
+    }
+
+  // if (event.target.classList[0] === 'read' && bookMarksArray[0].read === true) {
+  //   bookMarksArray[0].toggleRead(!true);
+  //   event.target.classList.toggle('read-selected');
+  //   // console.log('toggle false', `${bookMarksArray[0].read}`);
+  //
+  // }
+  // if (event.target.classList[0] === 'read' && bookMarksArray[0].read === false) {
+  //   bookMarksArray[0].toggleRead(!false);
+  //   event.target.classList.toggle('read-selected');
+  //   // console.log('toggle to true?', `${bookMarksArray[0].read}`);
