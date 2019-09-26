@@ -102,7 +102,6 @@ button:hover {
   text-decoration-color: #FFC107;
 }
 .delete {
-  margin-left: 15.5rem;
 }
 .delete:hover {
   text-decoration: underline;
@@ -116,7 +115,46 @@ button:hover {
   color: #607D8b;
   text-decoration-color: #CFD8DC;
 }
-
+.read-delete {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.read {
+  width: 89%;
+}
 .error {
   background-color: rgba(255,193,7, 0.8);
+}
+
+@media (max-width: 640px){
+  main {
+    flex-direction: column;
+  }
+  .input-article {
+
+  }
+  .output-article {
+    width: 96%;
+  }
+  .card {
+    width: 91%;
+  }
+}
+@media (max-width: 440px){
+  main {
+    flex-direction: column;
+  }
+  .input-article {
+
+  }
+  .output-article {
+    width: 96%;
+  }
+  .card {
+    width: 87%;
+  }
+  }
+
+
 }

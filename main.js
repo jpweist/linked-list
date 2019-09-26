@@ -6,7 +6,7 @@ var eachNewBookMark = 0;
 var bookMarksArray = [];
 var deleteBtn = document.querySelector('.delete');
 var counter = 0;
-
+var target = '';
 var userInputWeb = document.querySelector('.user-input-web');
 var userInputURL = document.querySelector('.user-input-url');
 
@@ -21,9 +21,10 @@ pageEvents.addEventListener('click', function(event) {
   // console.log(event.target.classList);
   // console.log(event.path[1].firstChild.id);
   console.log(event.path[1].id);
+  target = event.path[1].id;
   // console.log(event.target.closest.id);
   reading()
-  deleteBookmark(event.path[1].id);
+  deleteBookmark(target);
 
 });
 
@@ -73,7 +74,7 @@ function outputBookMarks() {
   div.innerHTML = '';
 
     for (var i = 0; i < arrayFls.length; i++) {
-      div.innerHTML =  `<div id='${arrayFls[i].id}' class='card'><h3 class='h3'>${arrayFls[i].title}</h3><hr/><p class='url'>${arrayFls[i].url}</p><hr/><p class='read'>Read</p><p class='delete'>Delete</p></div>`
+      div.innerHTML =  `<div id='${arrayFls[i].id}' class='card'><h3 class='h3'>${arrayFls[i].title}</h3><hr/><p class='url'>${arrayFls[i].url}</p><hr/><div class="read-delete"><p class='read'>Read</p><p class='delete'>Delete</p><div></div>`
       outputArticle.appendChild(div);
     }
   };
@@ -93,11 +94,15 @@ function fromLS() {
   arrayFls = JSON.parse(window.localStorage.getItem('bookMarkLS'));
 }
 
-function deleteBookmark() {
-    bookMarksArray.splice(0, 1);
+function deleteBookmark(target) {
+  for (var i = 0; i <arrayFls.length; i++ ) {
+    if (arrayFls[i].id === target) {
+      arrayFls.splice(i, 1);
+      }
+    }
     makeClass();
+  }
 
-}
 
 function reading() {
   if (event.target.classList[0] === 'read' && bookMarksArray[0].read === true) {
