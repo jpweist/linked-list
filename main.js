@@ -17,15 +17,15 @@ window.onload = function() {
   getBookmarks();
 
 }
-window.addEventListener('load', getBookmarks());
+// window.addEventListener('load', getBookmarks());
 
 
 pageEvents.addEventListener('click', function(event) {
   // console.log(event.target.classList[0]);
   // console.log(event.target.classList);
   // console.log(event.path[1].firstChild.id);
-  console.log(event.path[1].id);
-  target = event.path[1].id;
+  // console.log(event.path[1].id);
+  // target = event.path[1].id;
   // console.log(event.target.closest.id);
   reading(event)
   deleteBookmark(event);
@@ -87,21 +87,21 @@ function outputBookMarks() {
   //   div.innerHTML = '';
   //   console.log('no bookmarks')
   // }
-  fromLS();
   lSArray()
-  if (arrayFls.length !== 0) {
-
+  fromLS();
+  if (arrayFls.length !== null) {
+    var div = document.createElement('div');
+    div.innerHTML = '';
     for (var i = 0; i < arrayFls.length; i++) {
-      var div = document.createElement('div');
-      div.innerHTML = '';
       div.innerHTML =  `<div id='${arrayFls[i].id}' class='card'><h3 class='h3'>${arrayFls[i].title}</h3><hr/><p class='url'>${arrayFls[i].url}</p><hr/><div class="read-delete"><p class='read'>Read</p><p class='delete'>Delete</p><div></div>`
       outputArticle.appendChild(div);
       // console.log('bookmarks' + i)
-
-  }
     }
-  };
+  } if (arrayFls.length === null) {
+    delete div;
+  }
 
+}
 
 
 // to localStorage
@@ -115,33 +115,40 @@ function lSArray() {
 }
 // from localStorage
 function fromLS() {
-    var fromStorage = localStorage.getItem("bookMarkLS");
+    // var fromStorage = localStorage.getItem("bookMarkLS");
 
-    arrayFls = JSON.parse(fromStorage);
+    arrayFls = JSON.parse(localStorage.getItem('bookMarkLS'))
 }
 
 function deleteBookmark(event) {
-  var deleteID = event.path[2].id.toString();
-  console.log(arrayFls.length);
-  console.log(event.target.classList.value);
-  if (arrayFls.length === 1) {
-    bookMarksArray.splice([0], 1);
-    arrayFls.splice([0], 1);
-    // outputBookMarks();
-
-
-  }
-  for (var j = 0; j <arrayFls.length; j++) {
-    if (arrayFls[j].id === deleteID) {
-      bookMarksArray[j] = arrayFls[j];
-      console.log(`arrayFls `, deleteID);
-      return bookMarksArray.splice([j], 1);
+  if (event.target.className === 'delete') {
+    var deleteID = event.path[2].id.toString();
+    deleteID = deleteID.toString();
+    // console.log(arrayFls.length, deleteID.toString());
+    console.log(event.target.classList.value);
+    if (arrayFls.length === 1) {
+      bookMarksArray.splice([0], 1);
+      arrayFls.splice([0], 1);
+      console.log(deleteID);
+      document.getElementById(deleteID).remove();
 
     }
-  }
+    for (var j = 0; j <arrayFls.length; j++) {
+      if (arrayFls[j].id === deleteID) {
+        bookMarksArray[j] = arrayFls[j];
+        console.log(`arrayFls `, deleteID);
+        return bookMarksArray.splice([j], 1);
 
+      }
+    }
   }
+}
 
+function removeElement(deleteID) {
+    // Removes an element from the document
+    var element = document.getElementById(deleteID);
+    element.parentNode.removeChild(deleteID);
+}
 
 function reading(event) {
   // console.log(event.path[2].id.toString());
