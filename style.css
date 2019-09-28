@@ -52,16 +52,18 @@ hr {
   width: 85%;
 }
 .user-input-section input {
-  border: none;
-  color: gray;
-  display: block;
-  margin: auto;
-  margin-bottom: 1.2rem;
-  margin-top: .5rem;
-  padding:  .1rem 0;
-  width: 100%;
+    border: none;
+    color: gray;
+    display: block;
+    margin: auto;
+    margin-bottom: 1.2rem;
+    margin-top: .5rem;
+    padding: .1rem 0;
+    width: 98.8%;
 }
-
+input[type="text"] {
+  padding-left: 0.3rem;
+}
 .user-input-header {
 
 }
@@ -126,6 +128,7 @@ button:hover {
 }
 .error {
   background-color: rgba(255,193,7, 0.8);
+
 }
 
 @media (max-width: 640px){
