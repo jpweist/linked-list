@@ -9,12 +9,15 @@ var counter = 0;
 var target = '';
 var userInputWeb = document.querySelector('.user-input-web');
 var userInputURL = document.querySelector('.user-input-url');
+var arrayFls = [];
+// enterButton.disabled = true;
+
 // ######### event listners
 
 window.onload = function() {
   // lSArray();
   // outputBookMarks();
-  getBookmarks();
+  outputBookMarks();
 
 }
 // window.addEventListener('load', getBookmarks());
@@ -58,6 +61,7 @@ function totalBookmarks() {
 }
 
 function getInputs() {
+  enterButton.disabled = !true;
   var userInputWeb = document.querySelector('.user-input-web');
   var userInputURL = document.querySelector('.user-input-url');
   if (userInputWeb.value !== "" && userInputURL.value !== " " && userInputWeb.value !== "Website Title" && userInputURL.value !== "Website URL") {
@@ -82,14 +86,9 @@ function makeClass(title, url) {
 }
 
 function outputBookMarks() {
-  // if (arrayFls.length <= 0 && bookMarksArray.length <= 0) {
-  //   var div = document.createElement('div');
-  //   div.innerHTML = '';
-  //   console.log('no bookmarks')
-  // }
-  lSArray()
-  fromLS();
-  if (arrayFls.length !== null) {
+    fromLS();
+    console.log(arrayFls);
+  if (arrayFls.length > 0) {
     var div = document.createElement('div');
     div.innerHTML = '';
     for (var i = 0; i < arrayFls.length; i++) {
@@ -123,46 +122,57 @@ function fromLS() {
 function deleteBookmark(event) {
   if (event.target.className === 'delete') {
     var deleteID = event.path[2].id.toString();
+    document.getElementById(deleteID).remove();
     deleteID = deleteID.toString();
+    for (var i = 0; i < bookMarksArray.length; i++) {
+      bookMarksArray[i].deleteBookmark()
+    }
     // console.log(arrayFls.length, deleteID.toString());
-    console.log(event.target.classList.value);
-    if (arrayFls.length === 1) {
-      bookMarksArray.splice([0], 1);
-      arrayFls.splice([0], 1);
-      console.log(deleteID);
-      document.getElementById(deleteID).remove();
-
+    // console.log(event.target.classList.value);
+      lSArray();
+      fromLS();
+      lSArray();
     }
     for (var j = 0; j <arrayFls.length; j++) {
       if (arrayFls[j].id === deleteID) {
         bookMarksArray[j] = arrayFls[j];
         console.log(`arrayFls `, deleteID);
-        return bookMarksArray.splice([j], 1);
+        bookMarksArray.splice(j, 1);
+        arrayFls.splice(j, 1);
+        lSArray();
+        fromLS();
+        lSArray();
 
       }
     }
   }
-}
 
-function removeElement(deleteID) {
-    // Removes an element from the document
-    var element = document.getElementById(deleteID);
-    element.parentNode.removeChild(deleteID);
-}
+
+
 
 function reading(event) {
-  // console.log(event.path[2].id.toString());
-  console.log(event.target.className);
   // loop thru bookMarksArray and find the id that was clicked on for deleteBtn
   // call the toggleRead function on the object to change read to true.
-    if (event.target.className === 'read') {
-      for (var i = 0; i < bookMarksArray.length; i++) {
 
-        bookMarksArray[i].toggleRead();
-        bookMarksArray[i].read = true;
-        event.target.classList.toggle('read-selected');
+  // console.log(event.path[2].id.toString());
+  console.log(event.target.className, event.path[2]);
+
+  var deleteID = event.path[2];
+
+    if (event.target.className === 'read') {
+        deleteID.add =+ '.read-selected';
+        for (var i = 0; i < arrayFls.length; i++) {
+          bookMarksArray[i].toggleRead();
+        }
+    if (event.target.className === 'read-selected') {
+      deleteID.remove('.read-selected');
+      for (var j = 0; j < arrayFls.length; j++) {
+          arrayFls[j].toggleRead();
+          bookMarksArray[j].totalRead--;
       }
 
+    }
+        // event.target.classList.toggle('read-selected');
 
     }
 
