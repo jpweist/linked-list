@@ -10,14 +10,23 @@ var target = '';
 var userInputWeb = document.querySelector('.user-input-web');
 var userInputURL = document.querySelector('.user-input-url');
 var arrayFls = [];
-// enterButton.disabled = true;
+
+// ######## class linked vars
+var totalNumOfBookMarks = bookMarksArray.length;
+var bookRead = 0;
+var totalReadBookMarks = totalNumOfBookMarks - bookRead;
+// enterButton.disabled = true;\
 
 // ######### event listners
 
 window.onload = function() {
   // lSArray();
   // outputBookMarks();
-  outputBookMarks();
+  if (localStorage.length > 0) {
+    outputBookMarks();
+
+  }
+
 
 }
 // window.addEventListener('load', getBookmarks());
@@ -53,11 +62,11 @@ function getBookmarks() {
   }
 }
 function totalBookmarks() {
-
-  var addTotalBookmarks = bookMarksArray.length
   for (var i = 0; i < bookMarksArray.length; i++) {
     bookMarksArray[i].addTotalBookmarks();
   }
+  lSArray();
+
 }
 
 function getInputs() {
@@ -120,31 +129,40 @@ function fromLS() {
 }
 
 function deleteBookmark(event) {
-  if (event.target.className === 'delete') {
-    var deleteID = event.path[2].id.toString();
-    document.getElementById(deleteID).remove();
-    deleteID = deleteID.toString();
-    for (var i = 0; i < bookMarksArray.length; i++) {
-      bookMarksArray[i].deleteBookmark()
-    }
-    // console.log(arrayFls.length, deleteID.toString());
-    // console.log(event.target.classList.value);
+  if (localStorage.length > 0) {
+    if (event.target.className === 'delete') {
+      var deleteID = event.path[2].id.toString();
+      document.getElementById(deleteID).remove();
+      deleteID = deleteID.toString();
+      for (var i = 0; i < bookMarksArray.length; i++) {
+        bookMarksArray[i].deleteBookmark()
+      }
+      // console.log(arrayFls.length, deleteID.toString());
+      // console.log(event.target.classList.value);
       lSArray();
       fromLS();
       lSArray();
-    }
-    for (var j = 0; j <arrayFls.length; j++) {
-      if (arrayFls[j].id === deleteID) {
-        bookMarksArray[j] = arrayFls[j];
-        console.log(`arrayFls `, deleteID);
-        bookMarksArray.splice(j, 1);
-        arrayFls.splice(j, 1);
-        lSArray();
-        fromLS();
-        lSArray();
 
+    }
+    if (arrayFls !== 0) {
+      for (var j = 0; j <arrayFls.length; j++) {
+        if (arrayFls[j].id === deleteID) {
+          bookMarksArray[j] = arrayFls[j];
+          console.log(`arrayFls `, deleteID);
+          bookMarksArray.splice(j, 1);
+          arrayFls.splice(j, 1);
+          lSArray();
+          fromLS();
+          lSArray();
+
+        }
       }
     }
+    if (arrayFls === undefined ) {
+      
+    }
+
+  }
   }
 
 
@@ -153,22 +171,22 @@ function deleteBookmark(event) {
 function reading(event) {
   // loop thru bookMarksArray and find the id that was clicked on for deleteBtn
   // call the toggleRead function on the object to change read to true.
-
   // console.log(event.path[2].id.toString());
-  console.log(event.target.className, event.path[2]);
+  // console.log(event.target.className, event.path[2]);
 
-  var deleteID = event.path[2];
+  var deleteID = event.path[2].id.toString();
+  console.log(deleteID);
 
     if (event.target.className === 'read') {
         deleteID.add =+ '.read-selected';
         for (var i = 0; i < arrayFls.length; i++) {
-          bookMarksArray[i].toggleRead();
+          bookMarksArray[deleteID].toggleRead();
         }
     if (event.target.className === 'read-selected') {
       deleteID.remove('.read-selected');
       for (var j = 0; j < arrayFls.length; j++) {
           arrayFls[j].toggleRead();
-          bookMarksArray[j].totalRead--;
+          bookMarksArray[deleteID].totalRead--;
       }
 
     }
